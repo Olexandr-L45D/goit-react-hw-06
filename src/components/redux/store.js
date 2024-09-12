@@ -1,69 +1,137 @@
 import { configureStore } from '@reduxjs/toolkit';
 // export const store = configureStore({});
 
+// const initialState = {
+//     tasks: {
+//         items: [
+//             { id: 0, text: 'Learn HTML and CSS', completed: true },
+//             { id: 1, text: 'Get good at JavaScript', completed: true },
+//             { id: 2, text: 'Master React', completed: false },
+//             { id: 3, text: 'Discover Redux', completed: false },
+//             { id: 4, text: 'Build amazing apps', completed: false },
+//         ],
+//     },
+//     filters: {
+//         status: 'all',
+//         loading: false,
+//         error: null
+//     },
+//     user: {
+//         email: 'email',
+//         loading: false,
+//         error: null
+//     },
+// };
+
 const initialState = {
-    tasks: {
-        items: [
-            { id: 0, text: 'Learn HTML and CSS', completed: true },
-            { id: 1, text: 'Get good at JavaScript', completed: true },
-            { id: 2, text: 'Master React', completed: false },
-            { id: 3, text: 'Discover Redux', completed: false },
-            { id: 4, text: 'Build amazing apps', completed: false },
-        ],
+    contacts: {
+        items: []
     },
     filters: {
-        status: 'all',
-    },
-};
+        name: ""
+    }
+}
 
-const rootReducer = (state = initialState, action) => {
+const createSlice = (state = initialState.contacts, action) => {
     switch (action.type) {
-        case 'tasks/addTask': {
+        case 'tasks/addContact':
             return {
                 ...state,
-                tasks: {
-                    items: [...state.tasks.items, action.payload],
-                },
-            };
-        }
+                items: state.items + action.payload
+            }
+        case 'tasks/deleteContact':
+            return {
+                ...state,
+                items: state.items.filter((task) => task.id !== action.payload),
 
-        case 'tasks/deleteTask':
-            return {
-                ...state,
-                tasks: {
-                    items: state.tasks.items.filter((task) => task.id !== action.payload),
-                },
             };
 
         case 'tasks/toggleCompleted':
             return {
                 ...state,
-                tasks: {
-                    items: state.tasks.items.map((task) => {
-                        if (task.id !== action.payload) {
-                            return task;
-                        }
-                        return {
-                            ...task,
-                            completed: !task.completed,
-                        };
-                    }),
-                },
-            };
-
-        case 'filters/setStatusFilter':
-            return {
-                ...state,
-                filters: {
-                    status: action.payload,
-                },
+                items: state.items.map((task) => {
+                    if (task.id !== action.payload) {
+                        return task;
+                    }
+                    return {
+                        ...task,
+                        completed: !task.completed,
+                    };
+                }),
             };
 
         default:
             return state;
     }
-};
+}
+
+const filterReducer = (state = initialState.filters, action) => {
+    switch (action.type) {
+        case 'filters/setStatusFilter':
+            return {
+                ...state,
+                name: state.name + action.payload
+
+            };
+        default:
+            return state;
+    }
+}
+
 
 export const store = configureStore({
-    reducer: rootReducer,
+    reducer: {
+        contacts: createSlice,
+        filters: filterReducer,
+    }
+    // reducer: rootReducer,
 });
+
+// це був загальний редусер (нижче)
+// const rootReducer = (state = initialState, action) => {
+//     switch (action.type) {
+//         case 'tasks/addTask': {
+//             return {
+//                 ...state,
+//                 tasks: {
+//                     items: [...state.tasks.items, action.payload],
+//                 },
+//             };
+//         }
+
+//         case 'tasks/deleteTask':
+//             return {
+//                 ...state,
+//                 tasks: {
+//                     items: state.tasks.items.filter((task) => task.id !== action.payload),
+//                 },
+//             };
+
+//         case 'tasks/toggleCompleted':
+//             return {
+//                 ...state,
+//                 tasks: {
+//                     items: state.tasks.items.map((task) => {
+//                         if (task.id !== action.payload) {
+//                             return task;
+//                         }
+//                         return {
+//                             ...task,
+//                             completed: !task.completed,
+//                         };
+//                     }),
+//                 },
+//             };
+
+//         case 'filters/setStatusFilter':
+//             return {
+//                 ...state,
+//                 filters: {
+//                     status: action.payload,
+//                 },
+//             };
+
+//         default:
+//             return state;
+//     }
+// };
