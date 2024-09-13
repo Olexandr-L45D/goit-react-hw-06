@@ -45,7 +45,7 @@ export const { addContact, deleteContact, selectContacts } = slice.actions;
 // кореневий редюсер (або редюсер слайсу за дефолтом)
 export default slice.reducer;
 // console.log(slice.reducer);
-export { createSlice };
+// export { createSlice };
 
 
 
