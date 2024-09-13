@@ -23,16 +23,18 @@ import { configureStore } from '@reduxjs/toolkit';
 //     },
 // };
 
-const initialState = {
-    contacts: {
-        items: []
-    },
-    filters: {
-        name: ""
-    }
-}
+// переніс обєкти властивостей прямо в аргумент початкового стану функцій в круглих дужках, тому initialState вже не потрібен при рефакторингу
+// const initialState = {
+//     contacts: {
+//         items: []
+//     },
+//     filters: {
+//         name: ""
+//     }
+// }
 
-const createSlice = (state = initialState.contacts, action) => {
+// const createSlice = (state = initialState.contacts, action) => {
+const createSlice = (state = { items: [] }, action) => {
     switch (action.type) {
         case 'tasks/addContact':
             return {
@@ -65,13 +67,13 @@ const createSlice = (state = initialState.contacts, action) => {
     }
 }
 
-const filterReducer = (state = initialState.filters, action) => {
+// const filterReducer = (state = initialState.filters, action) => {
+const filterReducer = (state = { name: "" }, action) => {
     switch (action.type) {
         case 'filters/setStatusFilter':
             return {
                 ...state,
-                name: state.name + action.payload
-
+                name: state.name + action.payload,
             };
         default:
             return state;
