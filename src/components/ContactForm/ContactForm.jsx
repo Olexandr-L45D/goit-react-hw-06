@@ -4,6 +4,17 @@ import { Formik, Form, Field } from 'formik';
 import { useId } from "react";
 import * as Yup from "yup";
 import { ErrorMessage } from "formik";
+// 1. Імпортуємо хук
+import { useDispatch, useSelector } from "react-redux";
+import { addContact } from '../redux/contactsSlice'
+
+const MyComponent = () => {
+    // 2. Отримуємо посилання на функцію відправки екшенів
+    const dispatch = useDispatch();
+    const contacts = useSelector();
+};
+
+
 
 export default function ContactForm({ onAdd }) {
     const nameFieldId = useId();

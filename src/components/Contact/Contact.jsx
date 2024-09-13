@@ -1,6 +1,15 @@
 import css from "./Contact.module.css"
 import { BsFillPersonFill } from "react-icons/bs";
 import { AiFillPhone } from "react-icons/ai";
+// 1. Імпортуємо хук
+import { useDispatch, useSelector } from "react-redux";
+import { deleteContact } from '../redux/contactsSlice'
+
+const MyComponent = () => {
+    // 2. Отримуємо посилання на функцію відправки екшенів
+    const dispatch = useDispatch();
+    const contacts = useSelector();
+};
 
 export default function Contact({ obj: { id, name, number }, onDelete }) {
     return (
