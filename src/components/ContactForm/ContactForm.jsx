@@ -11,10 +11,8 @@ import { addContact } from '../redux/contactsSlice'
 const MyComponent = () => {
     // 2. Отримуємо посилання на функцію відправки екшенів
     const dispatch = useDispatch();
-    const contacts = useSelector();
+    const items = useSelector((state) => state.locale.items);
 };
-
-
 
 export default function ContactForm({ onAdd }) {
     const nameFieldId = useId();
@@ -26,10 +24,12 @@ export default function ContactForm({ onAdd }) {
         number: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required('Required')
     });
 
-    const handleSubmit = (values, actions) => {
+    const handleSubmit = (event, values, actions) => {
         values.id = idId;
-        onAdd(values);
-        console.log(values);
+        //додав з діспатч функцію додавання
+        dispatch(addContact(event.target.value))
+        // onAdd(values);
+        // console.log(values);
         actions.resetForm();
     };
     return (

@@ -6,7 +6,7 @@ import { changeFilter, selectNameFilter } from '../redux/filtersSlice'
 const MyComponent = () => {
     // 2. Отримуємо посилання на функцію відправки екшенів
     const dispatch = useDispatch();
-    const filters = useSelector();
+    const name = useSelector((state) => state.locale.name);
 };
 
 

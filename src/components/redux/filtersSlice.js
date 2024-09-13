@@ -4,16 +4,18 @@ const slice = createSlice({
     initialState: { name: "" },
     reducers: {
         changeFilter: (state, action) => {
-            return {
-                ...state,
-                name: state.name + action.payload,
-            };
+            state.name = action.payload;
+            // return {
+            //     ...state,
+            //     name: state.name + action.payload,
+            // };
         },
         selectNameFilter: (state, action) => {
-            return {
-                ...state,
-                name: state.name + action.payload,
-            };
+            state.name = action.payload;
+            // return {
+            //     ...state,
+            //     name: state.name + action.payload,
+            // };
         },
     }
 });

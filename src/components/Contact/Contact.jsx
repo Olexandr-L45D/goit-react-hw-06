@@ -8,7 +8,7 @@ import { deleteContact } from '../redux/contactsSlice'
 const MyComponent = () => {
     // 2. Отримуємо посилання на функцію відправки екшенів
     const dispatch = useDispatch();
-    const contacts = useSelector();
+    const items = useSelector((state) => state.locale.items);
 };
 
 export default function Contact({ obj: { id, name, number }, onDelete }) {
