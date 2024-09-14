@@ -1,4 +1,7 @@
+// filtersSlice.js (це окрема локаль - locale)
 import { createSlice } from '@reduxjs/toolkit';
+export const selecFilter = (state) => state.locale.name; // повертає шматок стану зі слайсу
+
 const slice = createSlice({
     name: "filters",
     initialState: { name: "" },

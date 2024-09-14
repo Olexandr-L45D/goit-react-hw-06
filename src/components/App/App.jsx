@@ -5,10 +5,17 @@ import objects from '../../../tasks.json';
 import ContactForm from "../ContactForm/ContactForm"
 import SearchBox from "../SearchBox/SearchBox"
 import ContactList from "../ContactList/ContactList"
+import { selectContact } from '../redux/contactsSlice'
+import { selecFilter } from '../redux/filtersSlice'
+import { useSelector } from 'react-redux';
 
 export default function App() {
-  const [filter, setFilter] = useState('');
+  // const items = useSelector((state) => state.locale.items); // приклад до спрощення
+  const items = useSelector(selectContact); // повертає шматок стану зі слайсу (selectContact = функція стану)
+  const name = useSelector(selecFilter); // повертає шматок стану зі слайсу
 
+
+  const [filter, setFilter] = useState('');
   const [tasks, setTasks] = useState(() => {
     const savClicks = window.localStorage.getItem("my-clicks");
     return savClicks !== null ? JSON.parse(savClicks) : objects

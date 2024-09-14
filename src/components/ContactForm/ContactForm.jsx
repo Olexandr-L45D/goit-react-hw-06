@@ -6,12 +6,14 @@ import * as Yup from "yup";
 import { ErrorMessage } from "formik";
 // 1. Імпортуємо хук
 import { useDispatch, useSelector } from "react-redux";
-import { addContact } from '../redux/contactsSlice'
+import { addContact, selectContact } from '../redux/contactsSlice'
 
 const MyComponent = () => {
     // 2. Отримуємо посилання на функцію відправки екшенів
     const dispatch = useDispatch();
-    const items = useSelector((state) => state.locale.items);
+    // const items = useSelector((state) => state.locale.items);
+    const items = useSelector(selectContact);
+
 };
 
 export default function ContactForm({ onAdd }) {

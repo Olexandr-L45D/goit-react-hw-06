@@ -3,12 +3,13 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { AiFillPhone } from "react-icons/ai";
 // 1. Імпортуємо хук
 import { useDispatch, useSelector } from "react-redux";
-import { deleteContact } from '../redux/contactsSlice'
+import { deleteContact, selectContact } from '../redux/contactsSlice'
 
 const MyComponent = () => {
     // 2. Отримуємо посилання на функцію відправки екшенів
     const dispatch = useDispatch();
-    const items = useSelector((state) => state.locale.items);
+    // 3. Функція селектор стану (належить слайсу тому що отримує частинку слайсу)
+    const items = useSelector(selectContact);
 };
 
 export default function Contact({ obj: { id, name, number }, onDelete }) {

@@ -1,5 +1,6 @@
-// contactsSlice.js
+// contactsSlice.js (це окрема локаль - locale)
 import { createSlice } from '@reduxjs/toolkit';
+export const selectContact = (state) => state.locale.items; // повертає шматок стану зі слайсу
 
 const slice = createSlice({
     name: "contacts",

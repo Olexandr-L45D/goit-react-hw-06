@@ -1,15 +1,37 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { creatCard } from './contactsSlice';
 import { filterReducer } from './filtersSlice';
-// import slice from './contactsSlice'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+
+// const persistConfig = {
+//     key: 'user-new',
+//     storage,
+//     whitelist: []
+// } // передаю цей обєкт конфігурації прямо в перше значення для persistReducer() для кожного слайсу своє значення "items" або "name"
+
+const persistedCardReducer = persistReducer({
+    key: 'user-new',
+    storage,
+    whitelist: ["items"]
+}, creatCard);
+// const persistedFilterReducer = persistReducer(persistConfig, filterReducer);
+const persistedFilterReducer = persistReducer({
+    key: 'user-new',
+    storage,
+    whitelist: ["name"]
+}, filterReducer);
 
 export const store = configureStore({
     reducer: {
-        contacts: creatCard,
-        filters: filterReducer,
+        contacts: persistedCardReducer,
+        filters: persistedFilterReducer,
     }
-    // reducer: rootReducer,
+    // reducer: rootReducer, (зверху додав йому обєкт з слайсами - рефакторинг)
 });
+
+export const persistor = persistStore(store);// це зберігачь який огортає СТОР, який я створив!
+
 // export const store = configureStore({});
 
 // const initialState = {
