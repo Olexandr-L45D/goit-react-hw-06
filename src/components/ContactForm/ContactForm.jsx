@@ -8,18 +8,13 @@ import { ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { addContact, selectContact } from '../redux/contactsSlice'
 
-const MyComponent = () => {
-    // 2. Отримуємо посилання на функцію відправки екшенів
-    const dispatch = useDispatch();
-    // const items = useSelector((state) => state.locale.items);
-    const items = useSelector(selectContact);
-
-};
-
 export default function ContactForm({ onAdd }) {
     const nameFieldId = useId();
     const numberFieldId = useId();
     const idId = nanoid();
+
+    const dispatch = useDispatch();
+    const items = useSelector(selectContact);
 
     const FeedbackSchema = Yup.object().shape({
         name: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),

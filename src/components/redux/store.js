@@ -1,9 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { creatCard } from './contactsSlice';
-import { filterReducer } from './filtersSlice';
-import { persistStore, persistReducer } from 'redux-persist'
+import creatCard from './contactsSlice';
+import filterReducer from './filtersSlice';
+import {
+    persistStore, persistReducer, FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-
 // const persistConfig = {
 //     key: 'user-new',
 //     storage,
@@ -26,7 +32,13 @@ export const store = configureStore({
     reducer: {
         contacts: persistedCardReducer,
         filters: persistedFilterReducer,
-    }
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            },
+        }),
     // reducer: rootReducer, (зверху додав йому обєкт з слайсами - рефакторинг)
 });
 
