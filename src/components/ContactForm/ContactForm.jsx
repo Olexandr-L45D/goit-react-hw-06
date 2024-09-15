@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { ErrorMessage } from "formik";
 // 1. Імпортуємо хук
 import { useDispatch, useSelector } from "react-redux";
-import { addContact, selectContacts } from '../redux/contactsSlice'
+import { addContact, selectContacts } from '../../redux/contactsSlice'
 
 // export default function ContactForm({ onAdd })
 export default function ContactForm() {

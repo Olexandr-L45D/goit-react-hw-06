@@ -1,7 +1,7 @@
 import css from "./SearchBox.module.css"
 // 1. Імпортуємо хук
 import { useDispatch, useSelector } from "react-redux";
-import { selecFilter, changeFilter } from '../redux/filtersSlice'
+import { selecFilter, changeFilter } from '../../redux/filtersSlice'
 // const MyComponent = () => {
 //     // 2. Отримуємо посилання на функцію відправки екшенів
 //     const dispatch = useDispatch();

@@ -3,7 +3,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { AiFillPhone } from "react-icons/ai";
 // 1. Імпортуємо хук
 import { useDispatch } from "react-redux";
-import { deleteContact } from '../redux/contactsSlice'
+import { deleteContact } from '../../redux/contactsSlice'
 
 export default function Contact({ contact }) {
     const dispatch = useDispatch();

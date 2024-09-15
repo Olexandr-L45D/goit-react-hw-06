@@ -1,8 +1,8 @@
 import css from './ContactList.module.css';
 import Contact from "../Contact/Contact"
-import { selectContacts } from '../redux/contactsSlice'
+import { selectContacts } from '../../redux/contactsSlice'
 import { useSelector } from 'react-redux';
-import { selecFilter } from '../redux/filtersSlice';
+import { selecFilter } from '../../redux/filtersSlice';
 
 const getVisiblContact = (contacts, selecName) => {
     // console.log("contacts ", contacts);
