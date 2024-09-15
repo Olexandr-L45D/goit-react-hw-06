@@ -13,14 +13,14 @@ import storage from 'redux-persist/lib/storage'
 // const persistConfig = {
 //     key: 'user-new',
 //     storage,
-//     whitelist: []
+//     initialState: []
 // } // передаю цей обєкт конфігурації прямо в перше значення для persistReducer() для кожного слайсу своє значення "items" або "name"
 
 const persistedCardReducer = persistReducer({
     key: 'user-new',
     storage,
     // whitelist: ["items"]
-    whitelist: {
+    initialState: {
         items: [
             {
                 "id": "id-1",

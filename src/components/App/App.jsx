@@ -1,13 +1,15 @@
 
 import css from './App.module.css'
 import React, { useState, useEffect } from "react";
-// import objects from '../../../tasks.json';
-import ContactForm from "../ContactForm/ContactForm"
-import SearchBox from "../SearchBox/SearchBox"
-import ContactList from "../ContactList/ContactList"
+// import { Routes, Route } from "react-router-dom";
+// import { lazy, Suspense } from "react"
+// const NotFoundCard = lazy(() => import("../NotFoundCard"));
 import { selectContact } from '../redux/contactsSlice'
 import { selecFilter } from '../redux/filtersSlice'
 import { useSelector } from 'react-redux';
+import ContactForm from "../ContactForm/ContactForm"
+import SearchBox from "../SearchBox/SearchBox"
+import ContactList from "../ContactList/ContactList"
 
 export default function App() {
   // const items = useSelector((state) => state.locale.items); // приклад до спрощення
@@ -53,12 +55,22 @@ export default function App() {
         <ContactForm />
         <SearchBox />
         <ContactList />
-        {/* <ContactForm onAdd={addTask} />
-        <SearchBox value={filter} onFilter={setFilter} />
-        <ContactList tasks={tasks} objects={objects} onDelete={deleteTask} /> */}
-
       </>
     </div>
   )
-}
+};
+
+
+
+//  <h1 className={css.title}>Phonebook</h1>
+//       <Suspense fallback={<div>LOADING list of movies...</div>}>
+//         <Routes>
+//           <Route path="/" element={<ContactForm />} />
+//           <Route path="*" element={<NotFoundCard />} />
+//         </Routes>
+//       </Suspense>
+// {/* <ContactForm onAdd={addTask} />
+//         <SearchBox value={filter} onFilter={setFilter} />
+//         <ContactList tasks={tasks} objects={objects} onDelete={deleteTask} /> */}
+
 
