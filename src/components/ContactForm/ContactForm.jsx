@@ -8,10 +8,11 @@ import { ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { addContact, selectContact } from '../redux/contactsSlice'
 
-export default function ContactForm({ onAdd }) {
-    const nameFieldId = useId();
-    const numberFieldId = useId();
-    const idId = nanoid();
+// export default function ContactForm({ onAdd })
+export default function ContactForm() {
+    // const nameFieldId = useId();
+    // const numberFieldId = useId();
+    // const idId = nanoid();
 
     const dispatch = useDispatch();
     const items = useSelector(selectContact);
@@ -22,9 +23,14 @@ export default function ContactForm({ onAdd }) {
     });
 
     const handleSubmit = (event, values, actions) => {
-        values.id = idId;
+        // values.id = idId;
         //додав з діспатч функцію додавання
-        dispatch(addContact(event.target.value))
+        dispatch(addContact({
+            id: crypto.randomUUID(),
+            completed: false,
+            name: event.target.name.value,
+            number: event.target.number.value
+        }))
         // onAdd(values);
         // console.log(values);
         actions.resetForm();
@@ -38,12 +44,13 @@ export default function ContactForm({ onAdd }) {
                 <Form>
                     <div className={css.items}>
                         <label className={css.label} htmlFor={nameFieldId} >Name</label>
-                        <Field className={css.inp} type="text" name="name" id={nameFieldId} />
+                        <Field className={css.inp} type="text" name="name" id={id} />
+                        {/* <Field className={css.inp} type="text" name="name" id={nameFieldId} /> */}
                         <ErrorMessage className={css.messag} name="name" component="span" />
                     </div>
                     <div className={css.items}>
                         <label className={css.label} htmlFor={numberFieldId} >Number</label>
-                        <Field className={css.inp} type="text" name="number" id={numberFieldId} />
+                        <Field className={css.inp} type="text" name="number" id={id} />
                         <ErrorMessage className={css.messag} name="number" component="span" />
                     </div>
                     <div className={css.btn}>

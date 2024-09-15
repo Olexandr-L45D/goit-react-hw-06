@@ -10,7 +10,10 @@ import { selecFilter, changeFilter, selectNameFilter } from '../redux/filtersSli
 // export default function SearchBox({ value, onFilter })
 export default function SearchBox({ value }) {
     const dispatch = useDispatch();
+    const filter = useSelector((state) => state.filters.status);
     const name = useSelector(selecFilter);
+
+    const handleFiltrChange = filter => dispatch(selecFilter(filter));
 
     const handleChange = (event) => {
         dispatch(changeFilter(event.target.value));
@@ -28,6 +31,8 @@ export default function SearchBox({ value }) {
             // onSelect={handleSelect}
             // onChange={(e) => onFilter(e.target.value)}
             />
+            <button onClick={() => handleFiltrChange("active")}>Activ </button>
+            <button onClick={() => handleFiltrChange("completed")}>Completed </button>
         </div>
     );
 }
