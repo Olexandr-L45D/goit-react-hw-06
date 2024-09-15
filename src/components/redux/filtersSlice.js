@@ -1,31 +1,25 @@
 // filtersSlice.js (це окрема локаль - locale)
 import { createSlice } from '@reduxjs/toolkit';
-export const selecFilter = (state) => state.locale.name; // повертає шматок стану зі слайсу
+// export const selecFilter = (state) => state.filters.name; // повертає шматок стану зі слайсу
 
 const slice = createSlice({
     name: "filters",
-    initialState: { name: "" },
+    initialState: { name: "", },
     reducers: {
         changeFilter: (state, action) => {
-            state.name = action.payload;
-            // return {
-            //     ...state,
-            //     name: state.name + action.payload,
-            // };
-        },
-        selectNameFilter: (state, action) => {
-            state.name = action.payload;
-            // return {
-            //     ...state,
-            //     name: state.name + action.payload,
-            // };
+            // state.name = action.payload;
+            return {
+                ...state,
+                name: action.payload,
+            };
         },
     }
 });
+export const selecFilter = (state) => state.filters.name;
 // створюємо фабрики екшкнів автоматично (нижче slice.actions.....)
 // slice.actions.changeFilter();
 // slice.actions.selectNameFilter();
-export const { changeFilter, selectNameFilter } = slice.actions;
+export const { changeFilter } = slice.actions;
 // кореневий редюсер (або редюсер слайсу за дефолтом)
 export default slice.reducer;
 // console.log(slice.reducer);

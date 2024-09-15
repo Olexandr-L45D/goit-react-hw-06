@@ -1,38 +1,19 @@
 // contactsSlice.js (це окрема локаль - locale)
+import { nanoid } from 'nanoid';
 import { createSlice } from '@reduxjs/toolkit';
-export const selectContact = (state) => state.locale.items; // повертає шматок стану зі слайсу
+// export const selectContact = (state) => state.locale.items; // повертає шматок стану зі слайсу
 
 const slice = createSlice({
     name: "contacts",
-    // initialState: { items: [] },
-    initialState: {
-        items: [{
-            "id": "id-1",
-            "name": "Rosie Simpson",
-            "number": "459-12-56"
-        },
-        {
-            "id": "id-2",
-            "name": "Hermione Kline",
-            "number": "443-89-12"
-        },
-        {
-            "id": "id-3",
-            "name": "Eden Clements",
-            "number": "645-17-79"
-        },
-        {
-            "id": "id-4",
-            "name": "Annie Copeland",
-            "number": "227-91-26"
-        }]
-    },
+    initialState: { items: [] },
+
     reducers: {
         addContact: (state, action) => {
-            return {
-                ...state,
-                items: [...state.items, action.payload],
-            };
+            state.items.push({
+                id: nanoid(),
+                name: action.payload.name,
+                number: action.payload.number,
+            })
         },
         deleteContact: (state, action) => {
             return {
@@ -40,28 +21,15 @@ const slice = createSlice({
                 items: state.items.filter((task) => task.id !== action.payload),
             };
         },
-        selectContacts: (state, action) => {
-            return {
-                ...state,
-                items: state.items.map((task) => {
-                    if (task.id !== action.payload) {
-                        return task;
-                    }
-                    return {
-                        ...task,
-                        completed: !task.completed,
-                    };
-                }),
-            };
-        },
+
     },
 });
-
+export const selectContacts = (state) => state.contacts.items;
 // створюємо фабрики екшкнів автоматично (нижче slice.actions.....)
 // slice.actions.addContact();
 // slice.actions.deleteContact();
 // slice.actions.selectContacts();
-export const { addContact, deleteContact, selectContacts } = slice.actions;
+export const { addContact, deleteContact } = slice.actions;
 // кореневий редюсер (або редюсер слайсу за дефолтом)
 export default slice.reducer;
 // console.log(slice.reducer);

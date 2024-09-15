@@ -1,23 +1,20 @@
 import css from "./SearchBox.module.css"
 // 1. Імпортуємо хук
 import { useDispatch, useSelector } from "react-redux";
-import { selecFilter, changeFilter, selectNameFilter } from '../redux/filtersSlice'
+import { selecFilter, changeFilter } from '../redux/filtersSlice'
 // const MyComponent = () => {
 //     // 2. Отримуємо посилання на функцію відправки екшенів
 //     const dispatch = useDispatch();
 //     const name = useSelector(selecFilter);
 // };
 // export default function SearchBox({ value, onFilter })
-export default function SearchBox({ value }) {
+export default function SearchBox() {
     const dispatch = useDispatch();
-    const filter = useSelector((state) => state.filters.status);
-    const name = useSelector(selecFilter);
+    const filter = useSelector(selecFilter);
 
-    const handleFiltrChange = filter => dispatch(selecFilter(filter));
+    // const handleFiltrChange = filter => dispatch(selecFilter(filter));
+    const handleFiltrChange = e => dispatch(changeFilter(e.target.value));
 
-    const handleChange = (event) => {
-        dispatch(changeFilter(event.target.value));
-    };
     // const handleSelect = (event) => {
     //     dispatch(selectNameFilter(event.target.value));
     // };
@@ -26,13 +23,9 @@ export default function SearchBox({ value }) {
             <h5 className={css.paragraf}>Finde contacts by name</h5>
             <input
                 type="text"
-                value={value}
-                onChange={handleChange}
-            // onSelect={handleSelect}
-            // onChange={(e) => onFilter(e.target.value)}
+                value={filter}
+                onChange={handleFiltrChange}
             />
-            <button onClick={() => handleFiltrChange("active")}>Activ </button>
-            <button onClick={() => handleFiltrChange("completed")}>Completed </button>
         </div>
     );
 }
